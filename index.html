@@ -13,6 +13,12 @@
     .fade {
       animation: fadeEffect 0.5s;
     }
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     @keyframes fadeEffect {
       from {
         opacity: 0;
@@ -23,33 +29,45 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-r from-blue-100 via-white to-green-100 text-gray-800 relative">
+<body class="bg-transparent text-gray-800 relative">
 
-  <!-- Coming Soon Modal -->
-  <div id="comingSoonModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center w-96">
-      <h2 class="text-xl font-bold mb-4">Coming Soon</h2>
-      <p class="text-gray-700 mb-4">We're currently in development. Stay tuned for updates!</p>
-      <button onclick="dismissModal()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-        Got it!
-      </button>
-    </div>
+  <!-- Hero Video Container -->
+  <div class="absolute inset-0 w-full h-full z-0">
+    <!-- Background Video -->
+    <video autoplay muted loop id="backgroundVideo" class="w-full h-full object-cover">
+      <source src="hero3.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Semi-transparent Overlay -->
+    <div class="absolute inset-0 bg-white bg-opacity-70"></div>
   </div>
 
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center p-6 bg-white shadow-md fixed w-full z-40">
-    <div class="text-2xl font-bold text-gray-900">
-      <a href="#" class="nav-link" data-target="#home">Asmo Visuals</a>
+  <!-- Main Content (z-10 ensures it's above video) -->
+  <div id="content" class="relative z-10 fade">
+    <!-- Coming Soon Modal -->
+    <div id="comingSoonModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6 text-center w-96">
+        <h2 class="text-xl font-bold mb-4">Coming Soon</h2>
+        <p class="text-gray-700 mb-4">We're currently in development. Stay tuned for updates!</p>
+        <button onclick="dismissModal()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          Got it!
+        </button>
+      </div>
     </div>
-    <div class="space-x-4">
-      <a href="#services" class="nav-link text-gray-700 hover:text-blue-500" data-target="#services">Services</a>
-      <a href="#portfolio" class="nav-link text-gray-700 hover:text-blue-500" data-target="#portfolio">Portfolio</a>
-      <a href="#contact" class="nav-link text-gray-700 hover:text-blue-500" data-target="#contact">Contact</a>
-    </div>
-  </nav>
 
-  <!-- Main Content -->
-  <div id="content" class="pt-24 fade">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-6 bg-white shadow-md fixed w-full z-40">
+      <div class="text-2xl font-bold text-gray-900">
+        <a href="#" class="nav-link" data-target="#home">Asmo Visuals</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#services" class="nav-link text-gray-700 hover:text-blue-500" data-target="#services">Services</a>
+        <a href="#portfolio" class="nav-link text-gray-700 hover:text-blue-500" data-target="#portfolio">Portfolio</a>
+        <a href="#contact" class="nav-link text-gray-700 hover:text-blue-500" data-target="#contact">Contact</a>
+      </div>
+    </nav>
+
     <!-- Home Section -->
     <section id="home" class="min-h-screen flex flex-col items-center justify-center">
       <h1 class="text-4xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 text-center">
@@ -58,6 +76,26 @@
       <p class="text-lg text-gray-700 text-center mb-8">
         We combine web development, videography, photography, and branding to bring your vision to life.
       </p>
+      <div class=" flex flex-col justify-center items-center p-6 rounded-lg text-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-4/5 max-w-screen-lg">
+          <div class="p-6 rounded-lg shadow-md text-center bg-gradient-to-r from-pink-100 to-pink-50">
+            <h3 class="font-bold text-lg text-gray-800 mb-2">Web Development</h3>
+            <p class="text-gray-600">Modern websites tailored to your business needs.</p>
+          </div>
+          <div class="p-6 rounded-lg shadow-md text-center bg-gradient-to-r from-blue-100 to-blue-50">
+            <h3 class="font-bold text-lg text-gray-800 mb-2">Videography</h3>
+            <p class="text-gray-600">Creating stunning videos to captivate your audience.</p>
+          </div>
+          <div class="p-6 rounded-lg shadow-md text-center bg-gradient-to-r from-green-100 to-green-50">
+            <h3 class="font-bold text-lg text-gray-800 mb-2">Social Media Marketing</h3>
+            <p class="text-gray-600">Build an engaged online community.</p>
+          </div>
+          <div class="p-6 rounded-lg shadow-md text-center bg-gradient-to-r from-yellow-100 to-yellow-50">
+            <h3 class="font-bold text-lg text-gray-800 mb-2">Branding</h3>
+            <p class="text-gray-600">Building brands that leave a lasting impression.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Services Section -->
@@ -82,8 +120,6 @@
         </div>
       </div>
     </section>
-
-
 
     <!-- Portfolio Section -->
     <section id="portfolio" class="min-h-screen flex flex-col items-center justify-center hidden">
