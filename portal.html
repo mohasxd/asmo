@@ -75,7 +75,30 @@
       </div>
     </nav>
 
-    
+<!-- Client Portal Section -->
+<section id="client-portal" class="min-h-screen flex flex-col items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Client Portal Login</h2>
+      <form action="login.php" method="POST" class="space-y-4">
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold text-left">Username:</label>
+          <input type="email" id="email" name="email" required 
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        </div>
+        <div>
+          <label for="password" class="block text-gray-700 font-semibold text-left">Password:</label>
+          <input type="password" id="password" name="password" required 
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        </div>
+        <button type="submit" disabled
+                class="w-full px-4 py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed">
+          Login (disabled)
+        </button>
+      </form>
+      <p class="mt-4 text-gray-600">Forgot your password? <a href="#" class="text-blue-500 hover:underline">Reset it here</a></p>
+    </div>
+  </section>
+      
 
   <!-- Footer -->
   <footer class="py-4 bg-gray-800 text-gray-200 text-center z-40">
