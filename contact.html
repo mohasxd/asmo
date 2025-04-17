@@ -105,6 +105,10 @@
                             message: formData.get('message')
                           };
                       
+                          // Hide any previous success or error messages
+                          document.querySelector('.success-message').style.display = 'none';
+                          document.querySelector('.error-message').style.display = 'none';
+                      
                           try {
                             const res = await fetch("https://contact-form-worker.projectstudy.workers.dev", {
                               method: "POST",
@@ -115,17 +119,21 @@
                             });
                       
                             if (res.ok) {
-                              alert("✅ Message sent successfully!");
+                              // Show success message
+                              document.querySelector('.success-message').style.display = 'block';
                               form.reset();
                             } else {
                               const error = await res.text();
-                              alert("❌ Error: " + error);
+                              // Show error message
+                              document.querySelector('.error-message').style.display = 'block';
                             }
                           } catch (err) {
-                            alert("❌ Network error: " + err.message);
+                            // Show error message in case of a network error
+                            document.querySelector('.error-message').style.display = 'block';
                           }
                         });
                       </script>
+                      
                                           
                     <div class="success-message w-form-done">
                         <div class="text-size-contact">Thank you! Your submission has been received!</div>
