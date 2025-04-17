@@ -97,7 +97,13 @@
                       
                           const form = e.target;
                           const formData = new FormData(form);
-                          const json = Object.fromEntries(formData.entries());
+                      
+                          // Ensure the keys are "name", "email", and "message"
+                          const json = {
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            message: formData.get('message')
+                          };
                       
                           try {
                             const res = await fetch("https://contact-form-worker.projectstudy.workers.dev", {
@@ -113,13 +119,14 @@
                               form.reset();
                             } else {
                               const error = await res.text();
-                              alert("❌ Error sending message: " + error);
+                              alert("❌ Error: " + error);
                             }
                           } catch (err) {
-                            alert("❌ Something went wrong: " + err.message);
+                            alert("❌ Network error: " + err.message);
                           }
                         });
-                      </script>                      
+                      </script>
+                                          
                     <div class="success-message w-form-done">
                         <div class="text-size-contact">Thank you! Your submission has been received!</div>
                     </div>
