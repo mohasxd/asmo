@@ -92,54 +92,53 @@
                         </div>
                     </form>
                     <script>
-                        document.getElementById('email-form').addEventListener('submit', async function (e) {
-                          e.preventDefault();
+                        document.addEventListener('DOMContentLoaded', function () {
+                          const form = document.getElementById('email-form');
+                          const successMessage = document.querySelector('.success-message');
+                          const errorMessage = document.querySelector('.error-message');
                       
-                          const form = e.target;
-                          const formData = new FormData(form);
+                          form.addEventListener('submit', async function (e) {
+                            e.preventDefault();
                       
-                          // Ensure the keys are "name", "email", and "message"
-                          const json = {
-                            name: formData.get('name'),
-                            email: formData.get('email'),
-                            message: formData.get('message')
-                          };
+                            // Hide both messages initially
+                            successMessage.style.display = 'none';
+                            errorMessage.style.display = 'none';
                       
-                          // Hide any previous success or error messages
-                          document.querySelector('.success-message').style.display = 'none';
-                          document.querySelector('.error-message').style.display = 'none';
+                            const formData = new FormData(form);
+                            const json = {
+                              name: formData.get('name'),
+                              email: formData.get('email'),
+                              message: formData.get('message')
+                            };
                       
-                          try {
-                            const res = await fetch("https://contact-form-worker.projectstudy.workers.dev", {
-                              method: "POST",
-                              headers: {
-                                "Content-Type": "application/json"
-                              },
-                              body: JSON.stringify(json)
-                            });
+                            try {
+                              const res = await fetch("https://contact-form-worker.projectstudy.workers.dev", {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(json)
+                              });
                       
-                            if (res.ok) {
-                              // Show success message
-                              document.querySelector('.success-message').style.display = 'block';
-                              document.querySelector('.error-message').style.display = 'none';
-                              form.reset();
-                            } else {
-                              const error = await res.text();
-                              // Show error message
-                              document.querySelector('.error-message').style.display = 'block';
+                              if (res.ok) {
+                                successMessage.style.display = 'block';
+                                errorMessage.style.display = 'none';
+                                form.reset();
+                              } else {
+                                successMessage.style.display = 'none';
+                                errorMessage.style.display = 'block';
+                              }
+                            } catch (err) {
+                              successMessage.style.display = 'none';
+                              errorMessage.style.display = 'block';
                             }
-                          } catch (err) {
-                            // Show error message in case of a network error
-                            document.querySelector('.error-message').style.display = 'block';
-                          }
+                          });
                         });
                       </script>
-                      
-                                          
-                    <div class="success-message w-form-done">
+                    <div class="success-message w-form-done" style="display: none">
                         <div class="text-size-contact">Thank you! Your submission has been received!</div>
                     </div>
-                    <div class="error-message w-form-fail">
+                    <div class="error-message w-form-fail" style="display: none">
                         <div class="text-size-medium-contact">Apologies! There was an error sending your message. Please try again next time.
                         </div>
                     </div>
